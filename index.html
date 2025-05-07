@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Tarefas</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f4f4f4;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    form {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      width: 75%;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+    }
+
+    button {
+      padding: 10px;
+      font-size: 16px;
+      width: 20%;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    ol {
+      list-style-type: decimal;
+      padding-left: 20px;
+    }
+
+    li {
+      padding: 10px;
+      font-size: 18px;
+      border-bottom: 1px solid #ddd;
+      cursor: pointer;
+    }
+
+    li.done {
+      text-decoration: line-through;
+      color: #888;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>Lista de Tarefas</h1>
+
+  <div class="container">
+    <!-- Formulário para adicionar nova tarefa -->
+    <form id="form-tarefa">
+      <input type="text" id="nova-tarefa" placeholder="Digite uma nova tarefa" required>
+      <button type="submit">Adicionar</button>
+    </form>
+
+    <!-- Lista de tarefas ordenada -->
+    <ol id="lista-tarefas">
+      <!-- As tarefas serão adicionadas aqui -->
+    </ol>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      // Função para adicionar uma nova tarefa
+      $('#form-tarefa').submit(function(event) {
+        event.preventDefault(); // Impede o envio do formulário
+
+        var tarefa = $('#nova-tarefa').val().trim(); // Pega o valor do input
+
+        if (tarefa) {
+          // Cria o novo item da lista
+          var novaTarefa = $('<li></li>').text(tarefa);
+
+          // Adiciona o item à lista ordenada
+          $('#lista-tarefas').append(novaTarefa);
+
+          // Limpa o campo de input após adicionar
+          $('#nova-tarefa').val('');
+        }
+      });
+
+      // Função para aplicar linha no texto ao clicar
+      $('#lista-tarefas').on('click', 'li', function() {
+        $(this).toggleClass('done'); // Adiciona ou remove a classe 'done'
+      });
+    });
+  </script>
+
+</body>
+</html>
